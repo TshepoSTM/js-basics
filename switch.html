@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Statement Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Switch Statement Example</h1>
+    <label for="weather">What's the weather like:</label><br/>
+    <select id="weather" name="weather">
+        <option value="sunny">Sunny</option>
+        <option value="rainy">Rainy</option>
+        <option value="cloudy">Cloudy</option>
+        <option value="snowy">Snowy</option>
+        <option value="windy">Windy</option>
+
+    </select><br/>
+<br/>
+    <a href="#" onclick="showWeatherMessage()">Check Weather</a>
+    <p id="weatherMessage"></p>
+    <script>
+        function showWeatherMessage() {
+            var weather = document.getElementById("weather").value;
+            var message = "";
+
+            switch (weather) {
+                case "sunny":
+                    message = "It's a bright and sunny day!";
+                    break;
+                case "rainy":
+                    message = "Don't forget your umbrella!";
+                    break;
+                case "cloudy":
+                    message = "It might rain later.";
+                    break;
+                case "snowy":
+                    message = "Time to build a snowman!";
+                    break;
+                case "windy":
+                    message = "Hold onto your hat!";
+                    break;
+                default:
+                    message = "Weather not recognized.";
+            }
+
+            document.getElementById("weatherMessage").innerText = message;
+        }
+    </script>
+</body>
+</html>
