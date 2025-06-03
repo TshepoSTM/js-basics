@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table>
+        <tr>
+            <td colspan="4" style="text-align: center;">
+                <input type="text" id="display" value="0" readonly style="width: 100%; font-size: 24px; text-align: right;">  
+            </td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitButtonPressed(7)">7</td>
+            <td class="digitButton" onclick="digitButtonPressed(8)">8</td>
+            <td class="digitButton" onclick="digitButtonPressed(9)">9</td>
+            <td class="operatorButton" onclick="setOperation('*')">*</td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitButtonPressed(4)">4</td>
+            <td class="digitButton"onclick="digitButtonPressed(5)">5</td>
+            <td class="digitButton"onclick="digitButtonPressed(6)">6</td>
+            <td class="operatorButton" onclick="setOperation('-')">-</td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitButtonPressed(1)">1</td>
+            <td class="digitButton" onclick="digitButtonPressed(2)">2</td>
+            <td class="digitButton" onclick="digitButtonPressed(3)">3</td>
+            <td class="operatorButton" onclick="setOperation('+')">+</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="digitButton" onclick="digitButtonPressed(0)">0</td>
+            <td class="ACButton" onclick="operatorAC()">AC</td>
+            <td class="operatorButton" onclick="setOperation('/')">/</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="operatorButton" onclick="calculateResult()">=</td>
+
+        </tr>
+    </table>
+
+    <script>
+        var newline = true
+        var value1;
+        var currentOperator;
+
+        function digitButtonPressed(digit){
+            if(newline) {
+                document.getElementById("display").value = digit;
+                newline = false;
+            }else{
+                var currentValue = document.getElementById("display").value;
+                document.getElementById("display").value = currentValue + digit;    
+            }
+        }
+
+        function operatorAC() {
+            document.getElementById("display").value = 0;
+            newline = true;
+        }
+
+        function setOperation(operator) {
+            currentOperator = operator;
+            value1 = parseFloat(document.getElementById("display").value);
+            newline = true;
+
+           /* var currentValue = document.getElementById("display").value;
+            if (currentValue !== "0") {
+                document.getElementById("display").value = currentValue + " " + operator + " ";
+                newline = true;
+            }*/
+        }
+
+        function calculateResult() {
+            var value2 = parseFloat(document.getElementById("display").value);
+            var result;
+
+             switch (currentOperator) {
+                case '+':
+                    result = value1 + value2;
+                    break;
+                case '-':
+                    result = value1 - value2;
+                    break;
+                case '*':
+                    result = value1 * value2;
+                    break;
+                case '/':
+                    if (value2 === 0) {
+                        alert("Cannot divide by zero");
+                        return;
+                    }
+                    result = value1 / value2;
+                    break;
+                default:
+                    alert("Invalid operation");
+                    return;
+            }
+
+            document.getElementById("display").value = result;
+            newline = true;
+        }
+    </script>
+
+</body>
+</html>
